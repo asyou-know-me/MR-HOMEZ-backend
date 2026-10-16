@@ -1,0 +1,31 @@
+{
+  "name": "mr-homez-backend",
+  "version": "1.0.0",
+  "description": "Backend API for MR.HOMEZ real estate application",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+  "dev": "nodemon server.js",
+  "start": "node server.js",
+  "db:generate": "drizzle-kit generate",
+  "db:migrate": "drizzle-kit migrate",
+  "db:push": "drizzle-kit push",
+  "admin:create": "node scripts/createAdmin.js"
+},
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1149.0",
+    "@aws-sdk/s3-request-presigner": "^3.1149.0",
+    "@neondatabase/serverless": "^1.0.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
+    "drizzle-orm": "^0.44.0",
+    "express": "^5.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.4.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.0",
+    "nodemon": "^3.1.0"
+  }
+}
