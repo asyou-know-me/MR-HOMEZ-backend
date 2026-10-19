@@ -1,8 +1,8 @@
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, getTableColumns } from "drizzle-orm";
 
 import { db } from "../database/db.js";
 
-import { enquiries } from "../database/schema.js";
+import { enquiries, properties, projects } from "../database/schema.js";
 
 class EnquiryRepository {
   async create(data) {
@@ -12,7 +12,16 @@ class EnquiryRepository {
   }
 
   async findAll() {
-    return await db.select().from(enquiries).orderBy(desc(enquiries.createdAt));
+    return await db
+      .select({
+        ...getTableColumns(enquiries),
+        propertyTitle: properties.title,
+        projectName: projects.name,
+      })
+      .from(enquiries)
+      .leftJoin(properties, eq(enquiries.propertyId, properties.id))
+      .leftJoin(projects, eq(enquiries.projectId, projects.id))
+      .orderBy(desc(enquiries.createdAt));
   }
 
   async updateStatus(id, status) {
