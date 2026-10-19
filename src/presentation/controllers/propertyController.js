@@ -119,7 +119,7 @@ class PropertyController {
 
   delete = async (req, res) => {
     try {
-      const property = await this.deleteProperty.execute(req, params.id);
+      const property = await this.deleteProperty.execute(req.params.id);
 
       res.status(200).json({
         success: true,
